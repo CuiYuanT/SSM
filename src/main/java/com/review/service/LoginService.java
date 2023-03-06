@@ -1,27 +1,17 @@
 package com.review.service;
 
+import com.review.dao.UserDao;
 import com.review.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.core.io.Resource;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 
 public class LoginService {
-
-//    public boolean login(String username,String password){
-//        if("root".equals(username)){
-//            if("111111".equals(password)){
-//                return true;
-//            }else {
-//                return false;
-//            }
-//        }else {
-//            return false;
-//        }
-//    }
 
     public boolean login(String userId,String password){
 
@@ -32,7 +22,8 @@ public class LoginService {
         try {
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis.xml"));
             sqlSession = sqlSessionFactory.openSession();
-            user =(User) sqlSession.selectOne("aaaaa.selectByUserId", new User(userId, password, null));
+            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            user = userDao.selectByUserId(userId, password);
             sqlSession.commit();
         } catch (IOException e) {
             e.printStackTrace();
