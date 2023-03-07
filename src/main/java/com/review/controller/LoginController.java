@@ -1,6 +1,7 @@
 package com.review.controller;
 
 import com.review.service.LoginService;
+import com.review.service.LoginService_02;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +16,7 @@ public class LoginController {
     public String login(HttpServletRequest request, HttpServletResponse response){
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        boolean b = new LoginService().login(username, password);
+        boolean b = new LoginService_02().login(username, password);
         if(b){
             return "List";
         }else {

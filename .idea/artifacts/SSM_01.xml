@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SSM_01">
+    <output-path>$PROJECT_DIR$/out/artifacts/SSM_01</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$/../../Tomcat10/apache-tomcat-8.5.35-windows-x64/apache-tomcat-8.5.35/webapps" />
+    </root>
+  </artifact>
+</component>

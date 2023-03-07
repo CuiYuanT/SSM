@@ -1,16 +1,16 @@
 package com.review.service;
 
-import com.review.dao.UserDao;
+import com.review.dao.mapper.UserMapper;
 import com.review.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.springframework.core.io.Resource;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+@Service
 public class LoginService {
 
     public boolean login(String userId,String password){
@@ -22,7 +22,7 @@ public class LoginService {
         try {
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(Resources.getResourceAsStream("mybatis.xml"));
             sqlSession = sqlSessionFactory.openSession();
-            UserDao userDao = sqlSession.getMapper(UserDao.class);
+            UserMapper userDao = sqlSession.getMapper(UserMapper.class);
             user = userDao.selectByUserId(userId, password);
             sqlSession.commit();
         } catch (IOException e) {
